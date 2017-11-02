@@ -1,0 +1,21 @@
+<div>
+	<input
+		type="text"
+		name="autoComplete"
+		placeholder="Type of Breed"
+		required
+		ng-change="onChange()"
+		ng-model="searchTerm"
+	>
+	<div>hideList: {{hideList}}</div>
+	<div>searchTerm: {{searchTerm}}</div>
+	
+	<ul ng-hide="hideList || searchTerm === undefined">
+		<li
+			ng-repeat="term in terms | filter : searchTerm"
+			ng-click="onListItemClick(term)"
+		>
+			{{term}}
+		</li>
+	</ul>
+</div>

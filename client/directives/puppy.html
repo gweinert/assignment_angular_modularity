@@ -1,0 +1,9 @@
+<div class="puppy">
+	<span>{{ puppy.name }}</span>
+	<span>{{ puppy.breed }}</span>
+	<span> Created: {{ puppy.createdAt | date : short }}</span>
+	<span>
+		<button ng-click="onAdopt({id: puppy.id})">Adopt</button>
+	</span>
+	<span>sorting by: {{puppy[sortOption]}}</td>
+</div>

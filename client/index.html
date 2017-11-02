@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="puppyApp">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Puppies</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+	<script src="./app.js"></script>
+	
+	<!-- services -->
+	<script src="./services/puppyService.js"></script>
+	<script src="./services/breedService.js"></script>
+	
+
+	<!-- controllers -->
+	<script src="./controllers/puppyController.js"></script>
+
+	<!-- directives -->
+	<script src="./directives/puppy.js"></script>
+	<script src="./directives/autoComplete.js"></script>
+	<script src="./directives/myClick.js"></script>
+	
+
+</head>
+<body>
+	<div ng-controller="PuppyCtrl">
+		<h1>The AJAX Puppy Shelter</h1>
+
+		<h3>Register A New Puppy</h3>
+		<form name="form">
+			<input
+				type="text"
+				name="name"
+				placeholder="Name"
+				required
+				ng-model="formData.name"
+			>
+			<auto-complete
+				search-term="formData.breed"
+				terms="breeds"
+				on-term-select="onBreedSelect(breed)"
+			>
+			</auto-complete>
+			<button
+				ng-disabled="form.$invalid"
+				ng-click="registerPuppy()"
+			>
+				Register
+			</button>
+		</form>
+
+		<button my-click="doThis()">
+			Click Me!
+		</button>
+		
+		<h3>Puppies</h3>
+		<div>
+			<button ng-click="updateSortBy('name')">Name</button>
+			<button ng-click="updateSortBy('breed')">Breed</button>
+			<button ng-click="updateSortBy('createdAt')">Created</button>
+			<div ng-repeat="puppy in puppies | orderBy : sortOption : sortOption === 'createdAt'">
+				<puppy
+					index="$index"
+					puppy="puppy"
+					on-adopt="adoptPuppy(id)"
+				></puppy>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
